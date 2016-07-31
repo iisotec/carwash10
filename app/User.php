@@ -11,8 +11,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'users';
+    
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'apellidos', 'email', 'password', 'tipo_usuario', 'dni', 
     ];
 
     /**
@@ -24,10 +26,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     public function socursal(){
-        return $this->hasOne(Socursal::class);
+        return $this->hasOne('App\Models\Socursal');
     }
 
-    public function lavado(){
-        return $this->hasMany(Lavado::class);
+    public function lavados(){
+        return $this->hasMany('App\Models\Lavado');
     }
+
 }

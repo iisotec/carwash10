@@ -11,9 +11,91 @@
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+# vehiculos, sera para poder acceder por la web que apuntara al controlador VehiculoController
+/*Route::resource('vehiculo', 'VehiculoController');
+*/
+
+
+/*
+|--------------------------------------------------------------------------
+| API routes
+|--------------------------------------------------------------------------
+*/
+
+/*Route::group(['prefix' => 'api', 'namespace' => 'API'], function () {
+    Route::group(['prefix' => 'v1'], function () {
+        require config('infyom.laravel_generator.path.api_routes');
+    });
+});*/
+
+/*Route::group(['middleware'=>'auth'], function(){
+	Route::resource('vehiculos', 'VehiculoController');
+	#socursales
+	Route::resource('socursals', 'SocursalController');
+	Route::post('atender_lavado', 'LavadoController@atender');
+	#lavados
+	Route::resource('lavados', 'LavadoController');
+	Route::post('lavado', 'LavadoController@crear');
+	#reportes
+	Route::get('reportes', 'PdfController@index');
+	Route::get('reportes/pdf', 'PdfController@reportes_basicos');
+	Route::get('reportes/reporte_rango_fecha', 'PdfController@reporte_rango_fecha');
+	Route::get('reportes/reporte_excel', 'ExcelController@reporteExcel');
+	#usuarios
+	Route::resource('users', 'UserController');
+
+});*/
+
+
+/*Route::group(['middleware'=>['auth', 'lavados'], 'prefix'=>'is_admin'], function(){
+
+	Route::resource('vehiculos', 'VehiculoController');
+	#socursales
+	Route::resource('socursals', 'SocursalController');
+	Route::post('atender_lavado', 'LavadoController@atender');
+	#lavados
+	Route::resource('lavados', 'LavadoController');
+	Route::post('lavado', 'LavadoController@crear');
+	#reportes
+	Route::get('reportes', 'PdfController@index');
+	Route::get('reportes/pdf', 'PdfController@reportes_basicos');
+	Route::get('reportes/reporte_rango_fecha', 'PdfController@reporte_rango_fecha');
+	Route::get('reportes/reporte_excel', 'ExcelController@reporteExcel');
+	#usuarios
+	Route::resource('users', 'UserController');
+
+});
+
+
+Route::group(['middleware'=>['auth', 'lavados'], 'prefix'=>'is_cajero'], function(){
+	Route::post('atender_lavado', 'LavadoController@atender');
+	Route::resource('lavados', 'LavadoController');
+	
+	Route::get('reportes', 'PdfController@index');
+	Route::get('reportes/pdf', 'PdfController@reportes_basicos');
+	Route::get('reportes/reporte_rango_fecha', 'PdfController@reporte_rango_fecha');
+	Route::get('reportes/reporte_excel', 'ExcelController@reporteExcel');
+	
+
+});*/
+Route::group( ['middleware' => ['auth','lavados'], 'prefix'=>'is_lavador'], function() {
+	Route::get('/', function () {
+	    return redirect()->to('LavadoController');
+	});
+	/*Route::resource('lavados', 'LavadoController');
+	Route::resource('vehiculos', 'VehiculoController');*/
+
+/*Route::group(['middleware'=>['auth', 'is_lavador'], 'prefix'=>'vehiculos'], function(){
+
+/*	Route::resource('vehiculos', 'VehiculoController');*/
+	/*Route::resource('lavados', 'LavadoController');
+	Route::post('lavado', 'LavadoController@crear');*/
+	
+
+});

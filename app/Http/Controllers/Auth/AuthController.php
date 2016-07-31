@@ -43,8 +43,7 @@ class AuthController extends Controller
      public function loginUsername()
     {
         return property_exists($this, 'username') ? $this->username : 'name';
-    }
-
+    }   
     /**
      * Get a validator for an incoming registration request.
      *
@@ -70,7 +69,10 @@ class AuthController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'apellidos' => $data['apellidos'],
             'email' => $data['email'],
+            'tipo_usuario'=> $data['tipo_usuario'],
+            'dni' => $data['dni'],
             'password' => bcrypt($data['password']),
         ]);
     }

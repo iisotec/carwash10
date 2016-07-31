@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('dni',8)->required()->unique();
             $table->string('name')->required();
             $table->string('apellidos')->required();
-            $table->enum('tipo_usuario', array('Administrador', 'Cajero', 'Lavador'))->required();
+            $table->enum('tipo_usuario', array('1', '2', '3'))->required();
             $table->string('email')->unique();
             $table->string('password')->required();
             $table->rememberToken();
