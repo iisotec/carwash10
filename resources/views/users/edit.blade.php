@@ -12,7 +12,7 @@
         <div class="row">
             {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch']) !!}
 
-            @include('users.fields')
+            @include('users.fields_update')
 
             {!! Form::close() !!}
         </div>

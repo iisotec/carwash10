@@ -32,33 +32,43 @@ class RedirectIfAuthenticated
         return $next($request);
     }*/
 
-    public function handle($request, Closure $next, $guard = null)
-    {
+    public function handle($request, Closure $next)
+    {   
+      $response = $next($request);
+      /*  if (Auth::check()) {
+            dd("HOLA ".$this->auth->user()->tipo_usuario);
+        }
+        else
+        {
+            dd('NO LLEGO'.Auth::check());
+        }*/
         if ($this->auth->check()) {
             switch ($this->auth->user()->tipo_usuario) 
-            {
+            {   
                 case '1':
                     # Administrador 
-                    return redirect()->to('is_admin');                        
+                    /*dd($this->auth->user());*/
+                    return redirect()->to('/lavados');                        
+
                     break;
 
                 case '2':
                     # Responsable de Área
-                    return redirect()->to('is_cajero');  
+                    return redirect()->to('/lavados');  
                     break;
 
                 case '3':
                     # Secretaria
-                    return redirect()->to('is_lavador');  
+                    return redirect()->to('/vehiculos');  
                     break;
                 default:
-                    return redirect()->to('login');  
+                    return redirect()->to('/login');  
                     break;
             } 
-            return redirect('/home');
+            return redirect('/lavados');
         }
 
-        return $next($request);
+        return $response;
     }
 }
 

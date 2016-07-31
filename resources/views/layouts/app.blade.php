@@ -46,25 +46,56 @@
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Inicio</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/vehiculos') }}">Vehiculos</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/socursals') }}">Socursales</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/lavados') }}">Lavados</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/users') }}">Usuarios</a></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/reportes') }}">Reportes</a></li>
-                </ul>
+                
+                @if(Auth::check())
+                <?php $tipo = 'Anomino'; ?>
+                @if(Auth::user()->tipo_usuario=='1')
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/home') }}">Inicio</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/vehiculos') }}">Vehiculos</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/socursals') }}">Socursales</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/lavados') }}">Lavados</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/users') }}">Usuarios</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/reportes') }}">Reportes</a></li>
+                    </ul>
+                    <?php $tipo = 'Administrador'; ?>
+                @elseif (Auth::user()->tipo_usuario=='2')
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/home') }}">Inicio</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/lavados') }}">Lavados</a></li>
+                    </ul>
+                    <?php $tipo = 'Cajero'; ?>
+                @elseif (Auth::user()->tipo_usuario=='3')
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/home') }}">Inicio</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/vehiculos') }}">Vehiculos</a></li>
+                    </ul>
+                    <?php $tipo = 'Lavador'; ?>
+                @else
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/home') }}">Inicio</a></li>
+                    </ul>
+
+                @endif
+                @else
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/home') }}">Inicio</a></li>
+                    </ul>                
+                @endif
                 <!-- <ul class="nav navbar-nav">
                     <li class="active"><a href="javascript:void(0);" onclick="cargarlistado(3,1);" >Reportes </a></li>
                 </ul> -->
@@ -78,11 +109,11 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->name }} , {{$tipo}}<span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a></li>
                             </ul>
                         </li>
                     @endif

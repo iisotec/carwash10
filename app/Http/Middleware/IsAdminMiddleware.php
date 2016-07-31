@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 use Illuminate\Contracts\Auth\Guard;
-use Closure;
 use Session;
 
 class IsAdminMiddleware
@@ -24,22 +23,28 @@ class IsAdminMiddleware
     }
     public function handle($request, Closure $next)
     {
-        switch ($this->auth->user()->tipo_usuario) {
+        /*$response = $next($request);*/
+        dd("TIPO USUARIO:".$this->auth->user()->tipo_usuario);
+        switch ($this->auth->user()->tipo_usuario)
+         {
             /*dd("tipo usuario".$this->auth->user()->tipo_usuario);*/
             case '1':
                 # Administrador 
+                /*dd('LLEGUE');*/
                 //return redirect()->to('admin');    
                 //Session::flash('message-error', 'No tiene privilegios de administrador');             
+                /*break;*/
+                dd("LLEGUE AQUI");
                 break;
 
             case '2':
                 # Responsable de Área
-                return redirect()->to('is_cajero');  
+                return redirect()->to('lavados');  
                 break;
 
             case '3':
                 # Secretaria
-                return redirect()->to('is_lavador');  
+                return redirect()->to('vehiculos');  
                 break;
             default:
                 return redirect()->to('/');  

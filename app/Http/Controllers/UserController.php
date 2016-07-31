@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-
+use Hash;
+/*use App\Models\User;*/
 class UserController extends InfyOmBaseController
 {
     /** @var  userRepository */
@@ -55,13 +56,12 @@ class UserController extends InfyOmBaseController
      * @return Response
      */
     public function store(CreateUserRequest $request)
-    {
+    {   
+        #primero encriptamos la contrasena que viene en texto plano
+        $request['password'] =Hash::make($request->password);
         $input = $request->all();
-
         $user = $this->userRepository->create($input);
-
         Flash::success('Usuario guardado Correctamente.');
-
         return redirect(route('users.index'));
     }
 
@@ -118,14 +118,22 @@ class UserController extends InfyOmBaseController
         $user = $this->userRepository->findWithoutFail($id);
 
         if (empty($user)) {
-            Flash::error('user not found');
+            Flash::error('Usuario no encontrado');
 
             return redirect(route('users.index'));
         }
-
+        #para encriptar contranas o caso contrario eliminar esta este campo.
+        if ($request['password']=='') {
+            # code...
+            unset($request['password']);
+        }
+        else
+        {
+            $request['password'] =Hash::make($request->password);
+        }
         $user = $this->userRepository->update($request->all(), $id);
 
-        Flash::success('user updated successfully.');
+        Flash::success('El usuario se ha actualizado Correctamente.');
 
         return redirect(route('users.index'));
     }

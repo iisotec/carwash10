@@ -13,7 +13,13 @@
             <td>{!! $user->dni !!}</td>
             <td>{!! $user->name !!}</td>
             <td>{!! $user->apellidos !!}</td>
-            <td>{!! $user->tipo_usuario !!}</td>
+            <?php if ($user->tipo_usuario=='1'): ?>
+             <td><span class=" atenderVisitante btn btn-primary">Administrador</span></td>       
+            <?php elseif ($user->tipo_usuario=='2'): ?>
+             <td><span class=" atenderVisitante btn btn-success">Cajero</span></td>          
+            <?php else: ?>
+            <td><span class=" atenderVisitante btn btn-info">Lavador</span></td>
+            <?php endif ?>
             <td>{!! $user->email !!}</td>
             
             <td>
