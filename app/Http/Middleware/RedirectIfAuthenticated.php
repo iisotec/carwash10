@@ -35,13 +35,6 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {   
       $response = $next($request);
-      /*  if (Auth::check()) {
-            dd("HOLA ".$this->auth->user()->tipo_usuario);
-        }
-        else
-        {
-            dd('NO LLEGO'.Auth::check());
-        }*/
         if ($this->auth->check()) {
             switch ($this->auth->user()->tipo_usuario) 
             {   

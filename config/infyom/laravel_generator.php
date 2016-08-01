@@ -75,7 +75,8 @@ return [
     |
     */
 
-    'templates'         => 'core-templates',
+    'templates'         => 'flatlab-templates',
+    /*templates => 'flatlab-templates'.*/
 
     /*
     |--------------------------------------------------------------------------

@@ -12,7 +12,9 @@
         "infyomlabs/core-templates": "dev-master",
         "infyomlabs/swagger-generator": "dev-master",
         "jlapp/swaggervel": "dev-master",
-        "laravelcollective/bus": "^5.2"
+        "laravelcollective/bus": "^5.2",
+        "infyomlabs/flatlab-templates": "dev-master",
+        "infyomlabs/metronic-templates": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

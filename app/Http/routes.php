@@ -34,7 +34,7 @@ Route::get('/home', 'HomeController@index');
     });
 });*/
 
-/*Route::group(['middleware'=>'auth'], function(){
+Route::group(['middleware'=>'auth'], function(){
 	Route::resource('vehiculos', 'VehiculoController');
 	#socursales
 	Route::resource('socursals', 'SocursalController');
@@ -50,55 +50,5 @@ Route::get('/home', 'HomeController@index');
 	#usuarios
 	Route::resource('users', 'UserController');
 
-});*/
-
-
-Route::group(['middleware'=>['auth', 'is_admin']], function(){
-
-	Route::resource('vehiculos', 'VehiculoController');
-	#socursales
-	Route::resource('socursals', 'SocursalController');
-	/*Route::post('atender_lavado', 'LavadoController@atender');*/
-	#lavados
-/*	Route::resource('lavados', 'LavadoController');*/
-	Route::post('atender_lavado', 'LavadoController@atender');
-	Route::resource('lavados', 'LavadoController');
-	Route::post('lavado', 'LavadoController@crear');
-
-	
-	#reportes
-	/*Route::get('reportes', 'PdfController@index');
-	Route::get('reportes/pdf', 'PdfController@reportes_basicos');
-	Route::get('reportes/reporte_rango_fecha', 'PdfController@reporte_rango_fecha');
-	Route::get('reportes/reporte_excel', 'ExcelController@reporteExcel');*/
-	#usuarios
-	Route::resource('users', 'UserController');
-
 });
 
-
-Route::group(['middleware'=>['auth', 'is_cajero']], function(){
-	Route::post('atender_lavado', 'LavadoController@atender');
-	Route::resource('lavados', 'LavadoController');
-	Route::post('lavado', 'LavadoController@crear');
-	
-	Route::get('reportes', 'PdfController@index');
-	Route::get('reportes/pdf', 'PdfController@reportes_basicos');
-	Route::get('reportes/reporte_rango_fecha', 'PdfController@reporte_rango_fecha');
-	Route::get('reportes/reporte_excel', 'ExcelController@reporteExcel');
-	
-
-});
-Route::group(['middleware' => ['auth','is_lavador']], function() {
-	Route::resource('vehiculos', 'VehiculoController');
-	/*Route::resource('lavados', 'LavadoController');
-	Route::resource('vehiculos', 'VehiculoController');*/
-
-/*Route::group(['middleware'=>['auth', 'is_lavador'], 'prefix'=>'vehiculos'], function(){
-
-/*	Route::resource('vehiculos', 'VehiculoController');*/
-	/*Route::resource('lavados', 'LavadoController');
-	Route::post('lavado', 'LavadoController@crear');*/
-	
-
-});

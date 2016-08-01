@@ -14,6 +14,7 @@
 <div class="form-group">
     <input type="hidden" class='estado' value="Pendiente">
 </div>
+<!-- ESTO ES UN TOQUE PARA EL ENVIO DEL FORMULARIO HACIA EL SERVIDOR CON AJAX-->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 {!! Form::open(['method'=>'POST' , 'id'=>'form_insert']) !!}
 

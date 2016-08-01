@@ -13,7 +13,7 @@ class ExcelController extends Controller
 		Excel::create('Reporte de Vehiculos en Excel', function($excel)
 		{
 			$excel->sheet('Sheetname', function($sheet)
-			{	$Vehiculos = Vehiculo::select('placa','fecha_registro', 'tipo','descripcion')->get();
+			{	$Vehiculos = User::select('placa','fecha_registro', 'tipo','descripcion')->get();
 				$data =[];
 				array_push($data, array('','','REPORTE DE VEHICULOS EN EXCEL'));
 				array_push($data, array('PLACA', 'FECHA REGISTRO', 'TIPO', 'DESCRIPCION'));

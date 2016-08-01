@@ -148,6 +148,7 @@ class UserController extends InfyOmBaseController
     public function destroy($id)
     {
         $user = $this->userRepository->findWithoutFail($id);
+        /*dd($user);*/
 
         if (empty($user)) {
             Flash::error('user not found');
@@ -157,7 +158,7 @@ class UserController extends InfyOmBaseController
 
         $this->userRepository->delete($id);
 
-        Flash::success('user deleted successfully.');
+        Flash::success('Se ha eliminado Correctamente.');
 
         return redirect(route('users.index'));
     }

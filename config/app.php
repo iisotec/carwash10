@@ -128,6 +128,8 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        # para la plantilla
+        InfyOm\FlatLabTemplates\FlatLabTemplatesServiceProvider::class,
         #para excel
         Collective\Bus\BusServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,

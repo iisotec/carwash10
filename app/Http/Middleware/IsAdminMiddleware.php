@@ -24,19 +24,18 @@ class IsAdminMiddleware
     public function handle($request, Closure $next)
     {
         /*$response = $next($request);*/
-        dd("TIPO USUARIO:".$this->auth->user()->tipo_usuario);
         switch ($this->auth->user()->tipo_usuario)
          {
             /*dd("tipo usuario".$this->auth->user()->tipo_usuario);*/
             case '1':
                 # Administrador 
                 /*dd('LLEGUE');*/
-                //return redirect()->to('admin');    
+                
                 //Session::flash('message-error', 'No tiene privilegios de administrador');             
                 /*break;*/
-                dd("LLEGUE AQUI");
+                /*return redirect()->to('/');    */
+                
                 break;
-
             case '2':
                 # Responsable de Área
                 return redirect()->to('lavados');  
